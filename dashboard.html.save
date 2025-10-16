@@ -1,0 +1,18 @@
+python3 -m http.server 8000
+clasp login --status
+eval "$(ssh-agent -s)"
+ssh-add ~/SheetsProject/Y5260985156652022
+
+# Terminal 1: serve dashboard
+python3 -m http.server 8000
+
+# Terminal 2: do dev work
+git add .
+git commit -m "Update code"
+git push
+echo "$(date): Git push completed" >> update.log
+clasp push
+echo "$(date): Apps Script updated" >> update.log
+cd ~/SheetsProject
+rm dashboard.html
+
