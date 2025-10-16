@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SheetsProject Live Status</title>
+  <style>
+    body { font-family: monospace; background:#111; color:#0f0; padding:10px; }
+    #log { white-space: pre-line; }
+  </style>
+</head>
+<body>
+  <h1>SheetsProject Live Status</h1>
+  <div id="log"></div>
+
+  <script>
+    async function fetchLog() {
+      const resp = await fetch('update.log?' + new Date().getTime());
+      const text = await resp.text();
+      document.getElementById('log').innerText = text;
+    }
+    setInterval(fetchLog, 2000); // refresh every 2 seconds
+    fetchLog();
+  </script>
+</body>
+</html>
